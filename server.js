@@ -1,5 +1,6 @@
 var Twit = require('twit');
 var yahooFinance = require('yahoo-finance');
+var dateFormat = require('dateformat');
 
 
 var T = new Twit({
@@ -9,10 +10,11 @@ var T = new Twit({
   , access_token_secret:  'VnyzKzMsmMgZtmqGtRMj2HI0aGloJsp76rmAN76TRy2EI'
 });
 
-var symbol = '$MBLY';
+var symbol = process.argv[2];
 var fs = require('fs');
-var fromDate = '2015-06-28';
-var toDate = '2015-05-31';
+var curDate = new Date();
+curDate.setDate(curDate.getDate()-9);
+var fromDate = dateFormat(curDate, 'yyyy-mm-dd');
 
 yahooFinance.historical({
   symbol: symbol.substr(1),
